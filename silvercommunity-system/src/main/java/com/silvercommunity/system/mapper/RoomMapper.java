@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.silvercommunity.system.domain.Room;
+import com.silvercommunity.system.domain.vo.RoomVo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 房间Mapper接口
@@ -11,6 +13,7 @@ import com.silvercommunity.system.domain.Room;
  * @author mzh
  * @date 2025-03-19
  */
+@Mapper
 public interface RoomMapper extends BaseMapper<Room> {
     /**
      * 查询房间
@@ -59,4 +62,8 @@ public interface RoomMapper extends BaseMapper<Room> {
      * @return 结果
      */
     public int deleteRoomByIds(Long[] ids);
+
+    List<RoomVo> getRoomsByFloorId(Long floorId);
+
+    List<Room> selectRoomByFloorId(Long id);
 }

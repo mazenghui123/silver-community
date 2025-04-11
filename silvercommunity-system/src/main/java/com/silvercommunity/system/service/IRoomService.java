@@ -2,6 +2,7 @@ package com.silvercommunity.system.service;
 
 import java.util.List;
 import com.silvercommunity.system.domain.Room;
+import com.silvercommunity.system.domain.vo.RoomVo;
 
 /**
  * 房间Service接口
@@ -58,4 +59,6 @@ public interface IRoomService
      * @return 结果
      */
     public int deleteRoomById(Long id);
+
+    public List<RoomVo> getRoomsByFloorId(Long floorId);
 }

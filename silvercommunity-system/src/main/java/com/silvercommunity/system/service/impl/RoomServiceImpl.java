@@ -2,6 +2,9 @@ package com.silvercommunity.system.service.impl;
 
 import java.util.List;
 import com.silvercommunity.common.utils.DateUtils;
+import com.silvercommunity.system.domain.RoomType;
+import com.silvercommunity.system.domain.vo.RoomVo;
+import com.silvercommunity.system.mapper.RoomTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.silvercommunity.system.mapper.RoomMapper;
@@ -19,6 +22,8 @@ public class RoomServiceImpl implements IRoomService
 {
     @Autowired
     private RoomMapper roomMapper;
+    @Autowired
+    private RoomTypeMapper roomTypeMapper;
 
     /**
      * 查询房间
@@ -54,6 +59,8 @@ public class RoomServiceImpl implements IRoomService
     public int insertRoom(Room room)
     {
         room.setCreateTime(DateUtils.getNowDate());
+        RoomType roomType = roomTypeMapper.selectRoomTypeById(room.getTypeId());
+        room.setTypeName(roomType.getName());
         return roomMapper.insertRoom(room);
     }
 
@@ -92,5 +99,10 @@ public class RoomServiceImpl implements IRoomService
     public int deleteRoomById(Long id)
     {
         return roomMapper.deleteRoomById(id);
+    }
+
+    @Override
+    public List<RoomVo> getRoomsByFloorId(Long floorId) {
+        return roomMapper.getRoomsByFloorId(floorId);
     }
 }

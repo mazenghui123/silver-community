@@ -51,8 +51,8 @@
             <el-table-column label="房型名称" align="center" prop="name" />
             <el-table-column label="床位数量" align="center" prop="bedCount" />
             <el-table-column label="费用" align="center" prop="price" />
-            <el-table-column label="介绍" align="center" prop="introduction" show-overflow-tooltip/>
-            <el-table-column label="照片" align="center" prop="photo" show-overflow-tooltip/>
+            <el-table-column label="介绍" align="center" prop="introduction" show-overflow-tooltip />
+            <el-table-column label="照片" align="center" prop="photo" show-overflow-tooltip />
             <el-table-column label="状态" align="center" prop="status">
                 <template slot-scope="scope">
                     <dict-tag :options="dict.type.com_dev_status" :value="scope.row.status" />

@@ -10,5 +10,5 @@ import java.util.List;
 @Data
 public class RoomVo extends Room {
 
-    private List<Bed> bedList;
+    private List<BedVo> bedVoList;
 }

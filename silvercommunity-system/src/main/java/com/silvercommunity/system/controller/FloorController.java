@@ -96,9 +96,9 @@ public class FloorController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('com:floor:remove')")
     @Log(title = "楼层", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+	@DeleteMapping("/{id}")
+    public AjaxResult remove(@PathVariable Long id)
     {
-        return toAjax(floorService.deleteFloorByIds(ids));
+        return toAjax(floorService.deleteFloorById(id));
     }
 }

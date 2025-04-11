@@ -95,4 +95,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <resultMap id="BaseResultMap" type="RoomVo">
+        <result column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="sort" property="sort"/>
+        <result column="type_id" property="typeId"/>
+        <result column="type_name" property="typeName"/>
+        <result column="floor_id" property="floorId"/>
+
+        <collection property="bedVoList" ofType="BedVo">
+            <result column="bed_id" property="id"/>
+            <result column="bed_number" property="bedNumber"/>
+            <result column="bed_status" property="bedStatus"/>
+            <result column="room_id" property="roomId"/>
+            <result column="elder_id" property="elderId"/>
+            <result column="elder_name" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getRoomsByFloorId" resultMap="BaseResultMap">
+        select br.id,
+               br.code,
+               br.sort,
+               br.type_id,
+               br.type_name,
+               br.floor_id,
+               bf.name as floor_name,
+               brt.price,
+               bb.id   as bed_id,
+               bb.bed_number,
+               bb.bed_status,
+               bb.room_id,
+               e.id    as elder_id,
+               e.name  as elder_name
+        from base_room as br
+                 left join base_floor as bf on br.floor_id = bf.id
+                 left join base_room_type as brt on br.type_id = brt.id
+                 left join base_bed as bb on br.id = bb.room_id
+                 left join base_elder as e on e.bed_id = bb.id
+        where br.floor_id = #{floorId}
+        order by br.sort , bed_number asc
+    </select>
+
+    <select id="selectRoomByFloorId" resultType="com.silvercommunity.system.domain.Room">
+        select *
+        from base_room
+        where floor_id = #{id}
+    </select>
 </mapper>

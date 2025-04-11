@@ -35,9 +35,7 @@
 
     <el-table v-loading="loading" :data="projectList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
       <el-table-column label="名称" align="center" prop="name" />
-      <el-table-column label="排序号" align="center" prop="orderNo" />
       <el-table-column label="单位" align="center" prop="unit" />
       <el-table-column label="价格" align="center" prop="price" />
       <el-table-column label="图片" align="center" prop="image" width="100">
@@ -45,7 +43,7 @@
           <image-preview :src="scope.row.image" :width="50" :height="50" />
         </template>
       </el-table-column>
-      <el-table-column label="护理要求" align="center" prop="nursingRequirement" show-overflow-tooltip/>
+      <el-table-column label="护理要求" align="center" prop="nursingRequirement" show-overflow-tooltip />
       <el-table-column label="状态" align="center" prop="status">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.com_dev_status" :value="scope.row.status" />
@@ -87,8 +85,9 @@
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <el-radio-group v-model="form.status">
-            <el-radio v-for="dict in dict.type.com_dev_status" :key="dict.value"
-              :label="parseInt(dict.value)">{{ dict.label }}</el-radio>
+            <el-radio v-for="dict in dict.type.com_dev_status" :key="dict.value" :label="parseInt(dict.value)">{{
+              dict.label
+              }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>

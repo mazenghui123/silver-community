@@ -2,6 +2,9 @@ package com.silvercommunity.system.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.silvercommunity.system.domain.vo.BedVo;
+import com.silvercommunity.system.domain.vo.RoomVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +46,14 @@ public class RoomController extends BaseController
     {
         startPage();
         List<Room> list = roomService.selectRoomList(room);
+        return getDataTable(list);
+    }
+
+    @PreAuthorize("@ss.hasPermi('com:room:list')")
+    @GetMapping("/RoomVoList")
+    public TableDataInfo getRoomList(Long floorId) {
+        startPage();
+        List<RoomVo> list = roomService.getRoomsByFloorId(floorId);
         return getDataTable(list);
     }
 

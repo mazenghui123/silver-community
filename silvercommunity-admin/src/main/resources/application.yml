@@ -127,3 +127,11 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    auto-mapping-behavior: full
+#    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    mapper-locations: classpath*:/**/mapper/system/*.xml
+#  type-aliases-package: com.tfq.dao

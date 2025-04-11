@@ -42,3 +42,12 @@ export function delRoom(id) {
     method: 'delete'
   })
 }
+
+// 查询房间vo列表
+export function listRoomVo(floorId) {
+  return request({
+    url: '/com/room/RoomVoList',
+    method: 'get',
+    params: floorId
+  })
+}

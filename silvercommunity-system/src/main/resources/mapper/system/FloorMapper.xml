@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null "> and code = #{code}</if>
         </where>
+        order by code
     </select>
     
     <select id="selectFloorById" parameterType="Long" resultMap="FloorResult">

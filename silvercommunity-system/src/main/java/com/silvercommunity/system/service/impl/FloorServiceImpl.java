@@ -1,9 +1,11 @@
 package com.silvercommunity.system.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.silvercommunity.common.exception.base.BaseException;
 import com.silvercommunity.common.utils.DateUtils;
 import com.silvercommunity.system.domain.Room;
 import com.silvercommunity.system.mapper.BedMapper;
@@ -76,22 +78,7 @@ public class FloorServiceImpl implements IFloorService {
     @Transactional
     public int updateFloor(Floor floor) {
         floor.setUpdateTime(DateUtils.getNowDate());
-        UpdateWrapper<Room> roomWrapper = new UpdateWrapper<>();
-        roomWrapper.lambda().eq(Room::getFloorId, floor.getId())
-                .set(Room::getFloorId, floor.getId());
-
         return floorMapper.updateFloor(floor);
-    }
-
-    /**
-     * 批量删除楼层
-     *
-     * @param ids 需要删除的楼层主键
-     * @return 结果
-     */
-    @Override
-    public int deleteFloorByIds(Long[] ids) {
-        return floorMapper.deleteFloorByIds(ids);
     }
 
     /**
@@ -102,6 +89,10 @@ public class FloorServiceImpl implements IFloorService {
      */
     @Override
     public int deleteFloorById(Long id) {
+        List<Room> rooms = roomMapper.selectRoomByFloorId(id);
+        System.out.println(rooms);
+        if (rooms != null && !rooms.isEmpty())
+            throw new BaseException("该楼层下有房间信息，无法删除");
         return floorMapper.deleteFloorById(id);
     }
 }
